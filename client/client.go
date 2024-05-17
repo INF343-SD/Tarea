@@ -40,7 +40,7 @@ func sendRequests(sv pb.AmmoClient, wg *sync.WaitGroup, teams struct {
 }
 
 func main() {
-	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
+	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())	# Cambiar localhost por la direccion del servidor
 	if err != nil {
 		fmt.Println("No se pudo contactar con el servidor: " + err.Error())
 	}
