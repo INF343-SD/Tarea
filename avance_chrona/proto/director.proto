@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package director;
+
+option go_package = "./Director";
+
+//Mensaje de Mercenario a Director (1)
+message Merc_Dir{
+    string nombre = 1;
+    int32 piso = 2;
+    int32 decision = 3;
+    bool vivo = 4;
+}
+
+//Mensaje de Director a Mercenario (1)
+message Dir_Merc{
+    bool vivo = 1;
+}
+
+//Mensaje de Mercenario a Director (2)
+message Merc_Dir2{
+    string nombre = 1;
+}
+
+//Mensaje de Director a Mercenario (2)
+message Dir_Merc2{
+    string nombre = 1;
+    int32 monto = 2;
+}
+
+
+//Mensaje de Director a DoshBank
+message Dir_DBank{
+    string nombre = 1;
+}
+
+//Mensaje de DoshBank a Director
+message DBank_Dir{
+    string nombre = 1;
+    int32 monto = 2;
+}
+
+//Servicio para llevar a cabo Killing Floor
+service KillingFloor{
+    rpc Decision(Merc_Dir) returns (Dir_Merc);
+    rpc Merc_Dir_Monto(Merc_Dir2) returns (Dir_Merc2);
+    rpc Pet_Monto(Dir_DBank) returns (DBank_Dir);
+}
+
