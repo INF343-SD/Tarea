@@ -3,7 +3,7 @@
 services:
   server:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: /DataNode/Dockerfile
     ports:
       - "50051:50055"

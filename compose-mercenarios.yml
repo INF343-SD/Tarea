@@ -1,0 +1,7 @@
+---
+
+services:
+  server:
+    build:
+      context: ./
+      dockerfile: /Mercenarios/Dockerfile
