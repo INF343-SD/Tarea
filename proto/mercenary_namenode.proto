@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package namenode;
+
+option go_package = ".";
+
+service MercenaryTaskService {
+  rpc SendTask(MercenaryTask) returns (MercenaryTaskAck) {}
+}
+
+message MercenaryTask {
+  string codigo = 1;
+  string piso = 2;
+  string decision = 3;
+}
+
+message MercenaryTaskAck {
+  string message = 1;
+}
