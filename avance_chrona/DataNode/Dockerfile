@@ -5,17 +5,18 @@ FROM golang:latest
 WORKDIR /app
 
 # Copia los archivos Go necesarios al contenedor
-COPY proto/ /app/proto
-COPY server/server.go .
-COPY go.mod .
-COPY go.sum .
-COPY README.md .
+
+COPY ../proto/ /app/proto
+COPY ../DataNode /app/
+COPY ../go.mod /app/
+COPY ../go.sum /app/
+COPY ../README.md /app/
 
 # Compila tu servidor Go
-RUN go build server.go
+RUN go build datanode.go
 
 # Expone el puerto en el que escucha tu servidor
-EXPOSE 50051
+EXPOSE 50055
 
 # Ejecuta tu servidor cuando se inicie el contenedor
-CMD ["./server"]
+CMD ["./datanode"]

@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v5.27.0--rc1
-// source: director.proto
+// source: proto/director.proto
 
 package Director
 
@@ -25,6 +25,8 @@ type KillingFloorClient interface {
 	Decision(ctx context.Context, in *Merc_Dir, opts ...grpc.CallOption) (*Dir_Merc, error)
 	Merc_Dir_Monto(ctx context.Context, in *Merc_Dir2, opts ...grpc.CallOption) (*Dir_Merc2, error)
 	Pet_Monto(ctx context.Context, in *Dir_DBank, opts ...grpc.CallOption) (*DBank_Dir, error)
+	Dir_NN_Dec(ctx context.Context, in *Dir_NameNode, opts ...grpc.CallOption) (*NameNode_Dir, error)
+	NameNode_DN(ctx context.Context, in *NameNode_DataNode, opts ...grpc.CallOption) (*DataNode_NameNode, error)
 }
 
 type killingFloorClient struct {
@@ -62,6 +64,24 @@ func (c *killingFloorClient) Pet_Monto(ctx context.Context, in *Dir_DBank, opts 
 	return out, nil
 }
 
+func (c *killingFloorClient) Dir_NN_Dec(ctx context.Context, in *Dir_NameNode, opts ...grpc.CallOption) (*NameNode_Dir, error) {
+	out := new(NameNode_Dir)
+	err := c.cc.Invoke(ctx, "/director.KillingFloor/Dir_NN_Dec", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *killingFloorClient) NameNode_DN(ctx context.Context, in *NameNode_DataNode, opts ...grpc.CallOption) (*DataNode_NameNode, error) {
+	out := new(DataNode_NameNode)
+	err := c.cc.Invoke(ctx, "/director.KillingFloor/NameNode_DN", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // KillingFloorServer is the server API for KillingFloor service.
 // All implementations must embed UnimplementedKillingFloorServer
 // for forward compatibility
@@ -69,6 +89,8 @@ type KillingFloorServer interface {
 	Decision(context.Context, *Merc_Dir) (*Dir_Merc, error)
 	Merc_Dir_Monto(context.Context, *Merc_Dir2) (*Dir_Merc2, error)
 	Pet_Monto(context.Context, *Dir_DBank) (*DBank_Dir, error)
+	Dir_NN_Dec(context.Context, *Dir_NameNode) (*NameNode_Dir, error)
+	NameNode_DN(context.Context, *NameNode_DataNode) (*DataNode_NameNode, error)
 	mustEmbedUnimplementedKillingFloorServer()
 }
 
@@ -84,6 +106,12 @@ func (UnimplementedKillingFloorServer) Merc_Dir_Monto(context.Context, *Merc_Dir
 }
 func (UnimplementedKillingFloorServer) Pet_Monto(context.Context, *Dir_DBank) (*DBank_Dir, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Pet_Monto not implemented")
+}
+func (UnimplementedKillingFloorServer) Dir_NN_Dec(context.Context, *Dir_NameNode) (*NameNode_Dir, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Dir_NN_Dec not implemented")
+}
+func (UnimplementedKillingFloorServer) NameNode_DN(context.Context, *NameNode_DataNode) (*DataNode_NameNode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NameNode_DN not implemented")
 }
 func (UnimplementedKillingFloorServer) mustEmbedUnimplementedKillingFloorServer() {}
 
@@ -152,6 +180,42 @@ func _KillingFloor_Pet_Monto_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _KillingFloor_Dir_NN_Dec_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Dir_NameNode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KillingFloorServer).Dir_NN_Dec(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/director.KillingFloor/Dir_NN_Dec",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KillingFloorServer).Dir_NN_Dec(ctx, req.(*Dir_NameNode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KillingFloor_NameNode_DN_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NameNode_DataNode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KillingFloorServer).NameNode_DN(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/director.KillingFloor/NameNode_DN",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KillingFloorServer).NameNode_DN(ctx, req.(*NameNode_DataNode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // KillingFloor_ServiceDesc is the grpc.ServiceDesc for KillingFloor service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -171,7 +235,15 @@ var KillingFloor_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "Pet_Monto",
 			Handler:    _KillingFloor_Pet_Monto_Handler,
 		},
+		{
+			MethodName: "Dir_NN_Dec",
+			Handler:    _KillingFloor_Dir_NN_Dec_Handler,
+		},
+		{
+			MethodName: "NameNode_DN",
+			Handler:    _KillingFloor_NameNode_DN_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "director.proto",
+	Metadata: "proto/director.proto",
 }

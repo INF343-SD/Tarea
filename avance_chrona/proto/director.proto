@@ -10,11 +10,13 @@ message Merc_Dir{
     int32 piso = 2;
     int32 decision = 3;
     bool vivo = 4;
+    int32 aciertos = 5;
 }
 
 //Mensaje de Director a Mercenario (1)
 message Dir_Merc{
     bool vivo = 1;
+    int32 aciertos = 2;
 }
 
 //Mensaje de Mercenario a Director (2)
@@ -29,15 +31,39 @@ message Dir_Merc2{
 }
 
 
-//Mensaje de Director a DoshBank
+//Mensaje de Director a DoshBank (1)
 message Dir_DBank{
     string nombre = 1;
 }
 
-//Mensaje de DoshBank a Director
+//Mensaje de DoshBank a Director (1)
 message DBank_Dir{
     string nombre = 1;
     int32 monto = 2;
+}
+
+//Mensaje director a NameNode (1)
+ message Dir_NameNode{
+    string nombre = 1;
+    int32 piso = 2;
+    int32 decision = 3;
+}
+
+//Mensaje NameNode a Director (1)
+ message NameNode_Dir{
+    int32 ack = 1;
+ }
+
+//Mensaje NameNode a DataNode (1)
+ message NameNode_DataNode{
+    string nombre = 1;
+    int32 piso = 2;
+    int32 decision = 3;
+}
+
+//Mensaje DataNode a NameNode (1)
+ message DataNode_NameNode{
+    int32 ack = 1;
 }
 
 //Servicio para llevar a cabo Killing Floor
@@ -45,5 +71,7 @@ service KillingFloor{
     rpc Decision(Merc_Dir) returns (Dir_Merc);
     rpc Merc_Dir_Monto(Merc_Dir2) returns (Dir_Merc2);
     rpc Pet_Monto(Dir_DBank) returns (DBank_Dir);
+    rpc Dir_NN_Dec(Dir_NameNode) returns (NameNode_Dir);
+    rpc NameNode_DN(NameNode_DataNode) returns (DataNode_NameNode);
 }
 

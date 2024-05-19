@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/streadway/amqp"
+	"google.golang.org/grpc"
 )
 
 var montos_mercenarios = map[string]int{
@@ -105,8 +106,6 @@ func consumeMessages() {
 }
 
 func main() {
-	consumeMessages()
-
 	port := ":50052"
 
 	conn, err := net.Listen("tcp", port)
@@ -116,4 +115,13 @@ func main() {
 		return
 	}
 	defer conn.Close()
+	fmt.Println("Servidor escuchando en el puerto: ", port)
+	sv := grpc.NewServer()
+	pb.RegisterKillingFloorServer(sv, &KillingFloorStruct{})
+	if err = sv.Serve(conn); err != nil {
+		fmt.Println("Error con el levantamiento del servidor: " + err.Error())
+	}
+
+	consumeMessages()
+
 }

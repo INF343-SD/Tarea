@@ -1,8 +1,8 @@
-User Piso_1 100000000
-Reverend Alberts Piso_1 200000000
-Lt. Bill Masterson Piso_1 300000000
-Ana Larive Piso_1 400000000
-Tom Banner Piso_1 500000000
-Mr. Foster Piso_1 600000000
-PC Rob Briar Piso_2 700000000
-Classic Briar Piso_2 800000000
+PC Rob Briar Piso_1 100000000
+Classic Briar Piso_1 200000000
+Tom Banner Piso_1 300000000
+Lt. Bill Masterson Piso_1 400000000
+Mr. Foster Piso_1 500000000
+Reverend Alberts Piso_2 600000000
+User Piso_2 700000000
+Ana Larive Piso_2 800000000
