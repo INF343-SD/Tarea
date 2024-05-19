@@ -4,6 +4,6 @@ services:
   server:
     build:
       context: ./
-      dockerfile: /DoshBank/Dockerfile
+      dockerfile: ./DoshBank/Dockerfile
     ports:
       - "50051:50052"

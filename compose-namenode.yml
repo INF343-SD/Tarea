@@ -4,6 +4,6 @@ services:
   server:
     build:
       context: /.
-      dockerfile: /NameNode/Dockerfile
+      dockerfile: ./NameNode/Dockerfile
     ports:
-      - "50051:50053"
+      - "50053:50053"

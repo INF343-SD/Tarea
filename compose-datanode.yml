@@ -4,6 +4,6 @@ services:
   server:
     build:
       context: ./
-      dockerfile: /DataNode/Dockerfile
+      dockerfile: ./DataNode/Dockerfile
     ports:
-      - "50051:50055"
+      - "50055:50055"

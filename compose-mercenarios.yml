@@ -4,4 +4,4 @@ services:
   server:
     build:
       context: ./
-      dockerfile: /Mercenarios/Dockerfile
+      dockerfile: ./Mercenarios/Dockerfile
