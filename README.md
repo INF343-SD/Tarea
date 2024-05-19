@@ -2,27 +2,43 @@
 - Bastián Navarrete         Rol: 202073510-7
 - Felipe Rojas              Rol: 201873112-9
 
+## Consideraciones:
+- Máquina 033 está el director y un DataNode
+- Máquina 034 DoshBank y un DataNode
+- Máquina 035 NameNode
+- Máquina 034 Mercenarios y un DataNode
+
+Debe ejecutar los comandos de abajo considerando estos puntos, de otro modo la tarea no funciona
+
 # Instrucciones de ejecución
-Corre el Director y un datanode en una máquina
+Corre el Director
 ```
-sudo docker compose -f docker-compose.yml -f compose-datanode.yml build
-```
-
-Corre el DoshBank y un datanode en una máquina
-```
-sudo docker compose -f compose-doshbank.yml -f compose-datanode.yml build
+sudo docker compose up
 ```
 
-Corre el NameNode en una máquina
+Corre el DoshBank
 ```
-sudo docker compose -f compose-namenode.yml build
-```
-
-Corre los mercenarios y un datanode en una máquina
-```
-sudo docker compose -f compose-mercenarios.yml -f compose-datanode.yml build
+cd DoshBank
+sudo docker compose up
 ```
 
+Corre el NameNode
+```
+cd NameNode
+sudo docker compose up
+```
+
+Corre los mercenarios
+```
+cd Mercenarios
+sudo docker run -it mercenarios-server
+```
+
+Corre un DataNode
+```
+cd DataNode
+sudo docker compose up
+```
 
 Para compilar director.proto:
 
