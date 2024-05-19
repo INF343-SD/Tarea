@@ -126,7 +126,7 @@ func solicitarMonto(sv pb.KillingFloorClient, nombre string) {
 }
 
 func main() {
-	conn, err := grpc.Dial("10.35.169.43:50051", grpc.WithInsecure())
+	conn, err := grpc.NewClient("10.35.169.43:50051", grpc.WithInsecure())
 	if err != nil {
 		fmt.Println("No se pudo contactar con el servidor: " + err.Error())
 	}
@@ -143,7 +143,7 @@ func main() {
 	if ver_monto == 1 {
 		solicitarMonto(sv, nombre)
 	} else {
-		decision_inicial = 0
+		decision_inicial = -1
 	}
 
 	mercenarios := []struct {

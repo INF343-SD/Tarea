@@ -3,5 +3,5 @@
 services:
   server:
     build:
-      context: ./
+      context: ../
       dockerfile: ./Mercenarios/Dockerfile

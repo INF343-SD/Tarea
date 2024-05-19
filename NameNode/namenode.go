@@ -43,22 +43,13 @@ func escribir(datos struct {
 }
 
 func enviarDecision_DataNode(ctx context.Context, decision struct {
-	nombre   string
-	piso     int32
-	decision int32
+	nombre    string
+	piso      int32
+	decision  int32
+	direccion string
 }) {
-	// se escoge una de las 3 direcciones al azar y luego se conecta a la direccion escogida
-	indice := rand.Intn(3)
-	var direccion string
-	if indice == 0 {
-		direccion = "10.35.169.43:50055"
-	} else if indice == 1 {
-		direccion = "10.35.169.44:50055"
-	} else {
-		direccion = "10.35.169.46:50055"
-	}
 
-	conn, err := grpc.Dial(direccion, grpc.WithInsecure())
+	conn, err := grpc.Dial(decision.direccion, grpc.WithInsecure())
 	if err != nil {
 		fmt.Println("No se pudo contactar con el servidor: " + err.Error())
 	}
@@ -81,17 +72,29 @@ func (s *KillingFloorStruct) Dir_NN_Dec(ctx context.Context, req *pb.Dir_NameNod
 	piso := req.Piso
 	decision := req.Decision
 
+	// se escoge una de las 3 direcciones al azar y luego se conecta a la direccion escogida
+	indice := rand.Intn(3)
+	var direccion string
+	if indice == 0 {
+		direccion = "10.35.169.43:50055"
+	} else if indice == 1 {
+		direccion = "10.35.169.44:50055"
+	} else {
+		direccion = "10.35.169.46:50055"
+	}
+
 	escribir(struct {
 		nombre  string
 		piso    int32
 		maquina string
-	}{nombre: nombre, piso: piso, maquina: "Director"})
+	}{nombre: nombre, piso: piso, maquina: direccion})
 
 	enviarDecision_DataNode(ctx, struct {
-		nombre   string
-		piso     int32
-		decision int32
-	}{nombre, piso, decision})
+		nombre    string
+		piso      int32
+		decision  int32
+		direccion string
+	}{nombre, piso, decision, direccion})
 
 	return &pb.NameNode_Dir{Ack: 1}, nil
 }
