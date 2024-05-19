@@ -28,7 +28,7 @@ func failOnError(err error, msg string) {
 }
 
 func publishMessage(nombre string, piso int32) {
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	conn, err := amqp.Dial("amqp://guest:guest@10.35.169.44:5672/")
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer conn.Close()
 
@@ -61,7 +61,7 @@ func publishMessage(nombre string, piso int32) {
 }
 
 func pedirMonto(ctx context.Context, nombre string) int32 {
-	conn2, err := grpc.Dial("localhost:50052", grpc.WithInsecure())
+	conn2, err := grpc.Dial("10.35.169.44:50052", grpc.WithInsecure())
 	if err != nil {
 		fmt.Println("No se pudo contactar con el servidor: " + err.Error())
 	}
@@ -89,7 +89,7 @@ func enviarDecision(ctx context.Context, decision struct {
 	piso     int32
 	decision int32
 }) {
-	conn3, err := grpc.Dial("localhost:50053", grpc.WithInsecure())
+	conn3, err := grpc.Dial("10.35.169.45:50053", grpc.WithInsecure())
 	if err != nil {
 		fmt.Println("No se pudo contactar con el servidor: " + err.Error())
 	}

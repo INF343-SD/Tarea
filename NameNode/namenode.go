@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"net"
 
 	"google.golang.org/grpc"
@@ -46,7 +47,18 @@ func enviarDecision_DataNode(ctx context.Context, decision struct {
 	piso     int32
 	decision int32
 }) {
-	conn, err := grpc.Dial("localhost:50055", grpc.WithInsecure())
+	// se escoge una de las 3 direcciones al azar y luego se conecta a la direccion escogida
+	indice := rand.Intn(3)
+	var direccion string
+	if indice == 0 {
+		direccion = "10.35.169.43:50055"
+	} else if indice == 1 {
+		direccion = "10.35.169.44:50055"
+	} else {
+		direccion = "10.35.169.46:50055"
+	}
+
+	conn, err := grpc.Dial(direccion, grpc.WithInsecure())
 	if err != nil {
 		fmt.Println("No se pudo contactar con el servidor: " + err.Error())
 	}
