@@ -3,7 +3,7 @@
 services:
   server:
     build:
-      context: ./
+      context: ../
       dockerfile: ./DoshBank/Dockerfile
     ports:
-      - "50051:50052"
+      - "50052:50052"
