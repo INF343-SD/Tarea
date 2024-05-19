@@ -5,22 +5,22 @@
 # Instrucciones de ejecución
 Corre el Director y un datanode en una máquina
 ```
-docker-compose -f docker-compose.yml -f compose-datanode.yml up --build
+sudo docker compose -f docker-compose.yml -f compose-datanode.yml build
 ```
 
 Corre el DoshBank y un datanode en una máquina
 ```
-docker-compose -f compose-doshbank.yml -f compose-datanode.yml up --build
+sudo docker compose -f compose-doshbank.yml -f compose-datanode.yml build
 ```
 
 Corre el NameNode en una máquina
 ```
-docker-compose -f compose-namenode.yml up --build
+sudo docker compose -f compose-namenode.yml build
 ```
 
 Corre los mercenarios y un datanode en una máquina
 ```
-docker-compose -f compose-mercenarios.yml -f compose-datanode.yml up --build
+sudo docker compose -f compose-mercenarios.yml -f compose-datanode.yml build
 ```
 
 
